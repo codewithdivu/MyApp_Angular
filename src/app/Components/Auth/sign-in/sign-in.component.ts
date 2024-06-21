@@ -1,5 +1,5 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Component, inject } from '@angular/core';
+import { Component, NgModule, inject } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -8,11 +8,13 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HotToastService } from '@ngxpert/hot-toast';
+import { NgxSpinner, NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
+import { SpinnerLoadingComponent } from '../../Common/spinner-loading/spinner-loading.component';
 
 @Component({
   selector: 'app-sign-in',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, SpinnerLoadingComponent],
   templateUrl: './sign-in.component.html',
   styleUrl: './sign-in.component.css',
 })
@@ -33,7 +35,8 @@ export class SignInComponent {
   constructor(
     private formBuilder: FormBuilder,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private spinner: NgxSpinnerService
   ) {
     // creating signin form
     this.signinForm = this.formBuilder.group({
@@ -45,29 +48,35 @@ export class SignInComponent {
 
   onSubmit() {
     if (this.signinForm.valid) {
+      this.spinner.show();
       const loginData = this.signinForm.value;
-      this.http
-        .post('http://localhost:8888/api/v1/auth/login', {
-          email: loginData.email,
-          password: loginData.password,
-        })
-        .subscribe(
-          (res: any) => {
-            console.log('res', res);
-            if (res.success) {
-              localStorage.setItem('accessToken', res.accessToken);
-              localStorage.setItem('myAppAuth', JSON.stringify(res.data));
-              this.toastService.success(res.msg);
-              this.router.navigate(['/dashbaord']);
-            } else {
-              this.toastService.error(res.msg);
+      setTimeout(() => {
+        this.http
+          .post('http://localhost:8888/api/v1/auth/login', {
+            email: loginData.email,
+            password: loginData.password,
+          })
+          .subscribe(
+            (res: any) => {
+              console.log('res', res);
+              if (res.success) {
+                localStorage.setItem('accessToken', res.accessToken);
+                localStorage.setItem('myAppAuth', JSON.stringify(res.data));
+                this.toastService.success(res.msg);
+                this.spinner.hide();
+                this.router.navigate(['/dashbaord']);
+              } else {
+                this.toastService.error(res.msg);
+                this.spinner.hide();
+              }
+            },
+            (error: HttpErrorResponse) => {
+              this.toastService.error(error.error.msg);
+              console.log('error', error);
+              this.spinner.hide();
             }
-          },
-          (error: HttpErrorResponse) => {
-            this.toastService.error(error.error.msg);
-            console.log('error', error);
-          }
-        );
+          );
+      }, 2000);
     } else {
       this.signinForm.markAllAsTouched();
     }

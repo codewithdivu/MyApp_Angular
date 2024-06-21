@@ -8,66 +8,56 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HotToastService } from '@ngxpert/hot-toast';
-import { SpinnerLoadingComponent } from '../../Common/spinner-loading/spinner-loading.component';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { SpinnerLoadingComponent } from '../../Common/spinner-loading/spinner-loading.component';
 
 @Component({
-  selector: 'app-sign-up',
+  selector: 'app-forgot-password',
   standalone: true,
   imports: [ReactiveFormsModule, SpinnerLoadingComponent],
-  templateUrl: './sign-up.component.html',
-  styleUrl: './sign-up.component.css',
+  templateUrl: './forgot-password.component.html',
+  styleUrl: './forgot-password.component.css',
 })
-export class SignUpComponent {
-  signupForm: FormGroup;
+export class ForgotPasswordComponent {
+  forgotPasswordForm: FormGroup;
   private toastService = inject(HotToastService);
 
   validationMessages = {
-    username: {
-      require: 'Username is required',
-    },
-    name: {
-      require: 'Name is required',
-    },
     email: {
       required: 'Email is required.',
       email: 'Please enter a valid email address.',
-    },
-    password: {
-      required: 'Password is required.',
     },
   };
 
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router,
     private http: HttpClient,
+    private router: Router,
     private spinner: NgxSpinnerService
   ) {
-    // creating singup form
-    this.signupForm = this.formBuilder.group({
+    // creating signin form
+    this.forgotPasswordForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
-      username: ['', [Validators.required]],
-      name: ['', [Validators.required]],
     });
   }
 
   onSubmit() {
-    if (this.signupForm.valid) {
+    if (this.forgotPasswordForm.valid) {
       this.spinner.show();
-      const signUpData = this.signupForm.value;
+      const formData = this.forgotPasswordForm.value;
       setTimeout(() => {
         this.http
-          .post('http://localhost:8888/api/v1/auth/register', {
-            ...signUpData,
+          .post('http://localhost:8888/api/v1/auth/forgot-password', {
+            email: formData.email,
           })
           .subscribe(
             (res: any) => {
+              console.log('res', res);
               if (res.success) {
+                localStorage.setItem('forgotPasswordEmail', formData.email);
                 this.toastService.success(res.msg);
                 this.spinner.hide();
-                this.router.navigate(['/auth/signin']);
+                this.router.navigate(['/auth/reset-password']);
               } else {
                 this.toastService.error(res.msg);
                 this.spinner.hide();
@@ -81,7 +71,7 @@ export class SignUpComponent {
           );
       }, 2000);
     } else {
-      this.signupForm.markAllAsTouched();
+      this.forgotPasswordForm.markAllAsTouched();
     }
   }
 }

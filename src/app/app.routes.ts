@@ -5,6 +5,8 @@ import { SignInComponent } from './Components/Auth/sign-in/sign-in.component';
 import { DashboardLayoutComponent } from './Layouts/dashboard-layout/dashboard-layout.component';
 import { AuthGuard } from './Guards/auth.guard';
 import { HomeComponent } from './Components/Dashboard/home/home.component';
+import { ForgotPasswordComponent } from './Components/Auth/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './Components/Auth/reset-password/reset-password.component';
 
 export const routes: Routes = [
   {
@@ -26,6 +28,16 @@ export const routes: Routes = [
         path: 'signin',
         component: SignInComponent,
         title: 'SignIn',
+      },
+      {
+        path: 'forgot-password',
+        component: ForgotPasswordComponent,
+        title: 'Forgot Password',
+      },
+      {
+        path: 'reset-password',
+        component: ResetPasswordComponent,
+        title: 'Reset Password',
       },
     ],
   },
