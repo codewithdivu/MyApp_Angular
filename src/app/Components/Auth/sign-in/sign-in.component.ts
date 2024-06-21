@@ -1,5 +1,5 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { HotToastService } from '@ngxpert/hot-toast';
 
 @Component({
   selector: 'app-sign-in',
@@ -17,6 +18,7 @@ import { Router } from '@angular/router';
 })
 export class SignInComponent {
   signinForm: FormGroup;
+  private toastService = inject(HotToastService);
 
   validationMessages = {
     email: {
@@ -55,12 +57,14 @@ export class SignInComponent {
             if (res.success) {
               localStorage.setItem('accessToken', res.accessToken);
               localStorage.setItem('myAppAuth', JSON.stringify(res.data));
+              this.toastService.success(res.msg);
               this.router.navigate(['/dashbaord']);
             } else {
-              alert(`error : ${res.message}`);
+              this.toastService.error(res.msg);
             }
           },
           (error: HttpErrorResponse) => {
+            this.toastService.error(error.error.msg);
             console.log('error', error);
           }
         );

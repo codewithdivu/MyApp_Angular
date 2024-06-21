@@ -1,5 +1,5 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { HotToastService } from '@ngxpert/hot-toast';
 
 @Component({
   selector: 'app-sign-up',
@@ -17,6 +18,7 @@ import { Router } from '@angular/router';
 })
 export class SignUpComponent {
   signupForm: FormGroup;
+  private toastService = inject(HotToastService);
 
   validationMessages = {
     username: {
@@ -58,12 +60,14 @@ export class SignUpComponent {
         .subscribe(
           (res: any) => {
             if (res.success) {
+              this.toastService.success(res.msg);
               this.router.navigate(['/auth/signin']);
             } else {
-              alert(`error : ${res.message}`);
+              this.toastService.error(res.msg);
             }
           },
           (error: HttpErrorResponse) => {
+            this.toastService.error(error.error.msg);
             console.log('error', error);
           }
         );
