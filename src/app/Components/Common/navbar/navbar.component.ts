@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { HotToastService } from '@ngxpert/hot-toast';
+import { PATH_AUTH } from '../../../Constants/path';
 
 @Component({
   selector: 'app-navbar',
@@ -24,6 +25,6 @@ export class NavbarComponent {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('myAppAuth');
     this.toastService.success('Successfully Logout.');
-    this.router.navigate(['/auth/signin']);
+    this.router.navigate([PATH_AUTH.signin]);
   }
 }

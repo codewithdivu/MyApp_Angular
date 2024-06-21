@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { HotToastService } from '@ngxpert/hot-toast';
 import { NgxSpinner, NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { SpinnerLoadingComponent } from '../../Common/spinner-loading/spinner-loading.component';
+import { PATH_DASHBOARD } from '../../../Constants/path';
 
 @Component({
   selector: 'app-sign-in',
@@ -64,7 +65,7 @@ export class SignInComponent {
                 localStorage.setItem('myAppAuth', JSON.stringify(res.data));
                 this.toastService.success(res.msg);
                 this.spinner.hide();
-                this.router.navigate(['/dashbaord']);
+                this.router.navigate([PATH_DASHBOARD.root]);
               } else {
                 this.toastService.error(res.msg);
                 this.spinner.hide();

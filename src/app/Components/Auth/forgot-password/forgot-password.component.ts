@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { HotToastService } from '@ngxpert/hot-toast';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SpinnerLoadingComponent } from '../../Common/spinner-loading/spinner-loading.component';
+import { PATH_AUTH } from '../../../Constants/path';
 
 @Component({
   selector: 'app-forgot-password',
@@ -57,7 +58,7 @@ export class ForgotPasswordComponent {
                 localStorage.setItem('forgotPasswordEmail', formData.email);
                 this.toastService.success(res.msg);
                 this.spinner.hide();
-                this.router.navigate(['/auth/reset-password']);
+                this.router.navigate([PATH_AUTH.resetPassword]);
               } else {
                 this.toastService.error(res.msg);
                 this.spinner.hide();

@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
+import { PATH_DASHBOARD } from '../../Constants/path';
 
 @Component({
   selector: 'app-auth-layout',
@@ -14,7 +15,7 @@ export class AuthLayoutComponent {
   constructor() {
     const auth = localStorage.getItem('accessToken');
     if (auth != null) {
-      this.router.navigate(['/dashbaord']);
+      this.router.navigate([PATH_DASHBOARD.root]);
     }
   }
 }

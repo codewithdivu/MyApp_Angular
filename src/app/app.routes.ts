@@ -7,6 +7,7 @@ import { AuthGuard } from './Guards/auth.guard';
 import { HomeComponent } from './Components/Dashboard/home/home.component';
 import { ForgotPasswordComponent } from './Components/Auth/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './Components/Auth/reset-password/reset-password.component';
+import { NotFoundComponent } from './Components/Common/not-found/not-found.component';
 
 export const routes: Routes = [
   {
@@ -43,7 +44,7 @@ export const routes: Routes = [
   },
   // Dashboard
   {
-    path: 'dashbaord',
+    path: 'dashboard',
     component: DashboardLayoutComponent,
     canActivate: [AuthGuard],
     children: [
@@ -54,5 +55,12 @@ export const routes: Routes = [
         title: 'Home',
       },
     ],
+  },
+  // Not-Found
+  // Catch-all route for 404 Not Found
+  {
+    path: '**',
+    component: NotFoundComponent,
+    title: 'Page Not Found',
   },
 ];

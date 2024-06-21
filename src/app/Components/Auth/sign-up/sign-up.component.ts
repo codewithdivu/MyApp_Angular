@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { HotToastService } from '@ngxpert/hot-toast';
 import { SpinnerLoadingComponent } from '../../Common/spinner-loading/spinner-loading.component';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { PATH_AUTH } from '../../../Constants/path';
 
 @Component({
   selector: 'app-sign-up',
@@ -67,7 +68,7 @@ export class SignUpComponent {
               if (res.success) {
                 this.toastService.success(res.msg);
                 this.spinner.hide();
-                this.router.navigate(['/auth/signin']);
+                this.router.navigate([PATH_AUTH.signin]);
               } else {
                 this.toastService.error(res.msg);
                 this.spinner.hide();
