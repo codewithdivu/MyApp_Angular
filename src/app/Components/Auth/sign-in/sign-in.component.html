@@ -70,11 +70,29 @@
                             class="form-control"
                             name="email"
                             formControlName="email"
-                            id="email"
                             placeholder="name@example.com"
                             required
+                            id="validationCustom03"
                           />
                           <label for="email" class="form-label">Email</label>
+                          <div
+                            class="text-danger"
+                            *ngIf="
+                              signinForm.get('email')!.hasError('required') &&
+                              signinForm.get('email')?.touched
+                            "
+                          >
+                            {{ validationMessages.email.required }}
+                          </div>
+                          <div
+                            class="text-danger"
+                            *ngIf="
+                              signinForm.get('email')?.hasError('email') &&
+                              signinForm.get('email')?.touched
+                            "
+                          >
+                            {{ validationMessages.email.email }}
+                          </div>
                         </div>
                       </div>
                       <div class="col-12">
@@ -92,6 +110,17 @@
                           <label for="password" class="form-label"
                             >Password</label
                           >
+                          <div
+                            class="text-danger"
+                            *ngIf="
+                              signinForm
+                                .get('password')!
+                                .hasError('required') &&
+                              signinForm.get('password')?.touched
+                            "
+                          >
+                            {{ validationMessages.password.required }}
+                          </div>
                         </div>
                       </div>
                       <div class="col-12">
@@ -108,7 +137,7 @@
                             class="form-check-label text-secondary"
                             for="remember_me"
                           >
-                            Keep me logged in
+                            Remember Me
                           </label>
                         </div>
                       </div>

@@ -11,11 +11,12 @@ import { Router } from '@angular/router';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { HotToastService } from '@ngxpert/hot-toast';
 import { PATH_AUTH } from '../../../Constants/path';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-reset-password',
   standalone: true,
-  imports: [SpinnerLoadingComponent, ReactiveFormsModule],
+  imports: [SpinnerLoadingComponent, ReactiveFormsModule, CommonModule],
   templateUrl: './reset-password.component.html',
   styleUrl: './reset-password.component.css',
 })
@@ -77,7 +78,6 @@ export class ResetPasswordComponent {
       this.router.navigate([PATH_AUTH.forgotPassword]);
     }
   }
-  // const otp = Object.values(this.otpForm.value).join('');
 
   onSubmit(): void {
     if (this.otpForm.valid) {
@@ -119,7 +119,7 @@ export class ResetPasswordComponent {
               this.spinner.hide();
             }
           );
-      }, 2000);
+      }, 1000);
     } else {
       this.otpForm.markAllAsTouched();
     }
@@ -127,8 +127,10 @@ export class ResetPasswordComponent {
 
   moveToNext(event: KeyboardEvent, index: number): void {
     const input = event.target as HTMLInputElement;
-    if (input.value && index < 6) {
-      const nextInput = document.querySelectorAll('input')[index];
+    if (input.value.length === input.maxLength && index < 6) {
+      const nextInput = document.querySelectorAll<HTMLInputElement>(
+        'input[type="number"]'
+      )[index];
       if (nextInput) {
         nextInput.focus();
       }

@@ -53,6 +53,17 @@
                           <label for="username" class="form-label"
                             >Username</label
                           >
+                          <div
+                            class="text-danger"
+                            *ngIf="
+                              signupForm
+                                .get('username')!
+                                .hasError('required') &&
+                              signupForm.get('username')?.touched
+                            "
+                          >
+                            {{ validationMessages.username.required }}
+                          </div>
                         </div>
                       </div>
                       <div class="col-6">
@@ -67,6 +78,15 @@
                             required
                           />
                           <label for="name" class="form-label">Name</label>
+                          <div
+                            class="text-danger"
+                            *ngIf="
+                              signupForm.get('name')!.hasError('required') &&
+                              signupForm.get('name')?.touched
+                            "
+                          >
+                            {{ validationMessages.name.required }}
+                          </div>
                         </div>
                       </div>
 
@@ -82,6 +102,24 @@
                             required
                           />
                           <label for="email" class="form-label">Email</label>
+                          <div
+                            class="text-danger"
+                            *ngIf="
+                              signupForm.get('email')!.hasError('required') &&
+                              signupForm.get('email')?.touched
+                            "
+                          >
+                            {{ validationMessages.email.required }}
+                          </div>
+                          <div
+                            class="text-danger"
+                            *ngIf="
+                              signupForm.get('email')?.hasError('email') &&
+                              signupForm.get('email')?.touched
+                            "
+                          >
+                            {{ validationMessages.email.email }}
+                          </div>
                         </div>
                       </div>
                       <div class="col-12">
@@ -99,6 +137,17 @@
                           <label for="password" class="form-label"
                             >Password</label
                           >
+                          <div
+                            class="text-danger"
+                            *ngIf="
+                              signupForm
+                                .get('password')!
+                                .hasError('required') &&
+                              signupForm.get('password')?.touched
+                            "
+                          >
+                            {{ validationMessages.password.required }}
+                          </div>
                         </div>
                       </div>
 

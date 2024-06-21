@@ -11,11 +11,12 @@ import { HotToastService } from '@ngxpert/hot-toast';
 import { SpinnerLoadingComponent } from '../../Common/spinner-loading/spinner-loading.component';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { PATH_AUTH } from '../../../Constants/path';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-sign-up',
   standalone: true,
-  imports: [ReactiveFormsModule, SpinnerLoadingComponent],
+  imports: [ReactiveFormsModule, SpinnerLoadingComponent, CommonModule],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.css',
 })
@@ -25,10 +26,10 @@ export class SignUpComponent {
 
   validationMessages = {
     username: {
-      require: 'Username is required',
+      required: 'Username is required',
     },
     name: {
-      require: 'Name is required',
+      required: 'Name is required',
     },
     email: {
       required: 'Email is required.',
@@ -80,7 +81,7 @@ export class SignUpComponent {
               this.spinner.hide();
             }
           );
-      }, 2000);
+      }, 1000);
     } else {
       this.signupForm.markAllAsTouched();
     }

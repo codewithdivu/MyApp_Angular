@@ -11,11 +11,12 @@ import { HotToastService } from '@ngxpert/hot-toast';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SpinnerLoadingComponent } from '../../Common/spinner-loading/spinner-loading.component';
 import { PATH_AUTH } from '../../../Constants/path';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-forgot-password',
   standalone: true,
-  imports: [ReactiveFormsModule, SpinnerLoadingComponent],
+  imports: [ReactiveFormsModule, SpinnerLoadingComponent, CommonModule],
   templateUrl: './forgot-password.component.html',
   styleUrl: './forgot-password.component.css',
 })
@@ -70,7 +71,7 @@ export class ForgotPasswordComponent {
               this.spinner.hide();
             }
           );
-      }, 2000);
+      }, 1000);
     } else {
       this.forgotPasswordForm.markAllAsTouched();
     }
