@@ -12,7 +12,7 @@ import { SpinnerLoadingComponent } from '../../Common/spinner-loading/spinner-lo
 import { NgxSpinnerService } from 'ngx-spinner';
 import { PATH_AUTH } from '../../../Constants/path';
 import { CommonModule } from '@angular/common';
-import { AuthServiceService } from '../../../Services/auth-service.service';
+import { AuthService } from '../../../Services/Auth/auth.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -42,7 +42,7 @@ export class SignUpComponent {
   };
 
   constructor(
-    private authService: AuthServiceService,
+    private authService: AuthService,
     private formBuilder: FormBuilder,
     private router: Router,
     private http: HttpClient,

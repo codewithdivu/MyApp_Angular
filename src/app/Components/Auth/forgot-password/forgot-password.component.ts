@@ -12,7 +12,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { SpinnerLoadingComponent } from '../../Common/spinner-loading/spinner-loading.component';
 import { PATH_AUTH } from '../../../Constants/path';
 import { CommonModule } from '@angular/common';
-import { AuthServiceService } from '../../../Services/auth-service.service';
+import { AuthService } from '../../../Services/Auth/auth.service';
 
 @Component({
   selector: 'app-forgot-password',
@@ -33,7 +33,7 @@ export class ForgotPasswordComponent {
   };
 
   constructor(
-    private authService: AuthServiceService,
+    private authService: AuthService,
     private formBuilder: FormBuilder,
     private http: HttpClient,
     private router: Router,

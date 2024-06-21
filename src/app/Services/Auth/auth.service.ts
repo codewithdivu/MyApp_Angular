@@ -10,7 +10,7 @@ import { catchError, map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthServiceService {
+export class AuthService {
   private apiUrl = 'http://localhost:8888/api/v1/auth';
 
   constructor(private http: HttpClient) {}

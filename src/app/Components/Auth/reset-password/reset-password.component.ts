@@ -12,7 +12,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { HotToastService } from '@ngxpert/hot-toast';
 import { PATH_AUTH } from '../../../Constants/path';
 import { CommonModule } from '@angular/common';
-import { AuthServiceService } from '../../../Services/auth-service.service';
+import { AuthService } from '../../../Services/Auth/auth.service';
 
 @Component({
   selector: 'app-reset-password',
@@ -53,7 +53,7 @@ export class ResetPasswordComponent {
     },
   };
   constructor(
-    private authService: AuthServiceService,
+    private authService: AuthService,
     private formBuilder: FormBuilder,
     private http: HttpClient,
     private router: Router,

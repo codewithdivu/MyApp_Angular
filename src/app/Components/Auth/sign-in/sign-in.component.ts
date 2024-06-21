@@ -12,7 +12,7 @@ import { NgxSpinner, NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { SpinnerLoadingComponent } from '../../Common/spinner-loading/spinner-loading.component';
 import { PATH_DASHBOARD } from '../../../Constants/path';
 import { CommonModule } from '@angular/common';
-import { AuthServiceService } from '../../../Services/auth-service.service';
+import { AuthService } from '../../../Services/Auth/auth.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -36,7 +36,7 @@ export class SignInComponent {
   };
 
   constructor(
-    private authService: AuthServiceService,
+    private authService: AuthService,
     private formBuilder: FormBuilder,
     private http: HttpClient,
     private router: Router,
