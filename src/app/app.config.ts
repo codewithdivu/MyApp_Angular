@@ -5,10 +5,13 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { routes } from './app.routes';
 import { provideHotToastConfig } from '@ngxpert/hot-toast';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { myInterceptorInterceptor } from './Interceptor/my-interceptor.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
+    provideHttpClient(withInterceptors([myInterceptorInterceptor])),
     provideAnimationsAsync(),
     provideHotToastConfig({
       position: 'top-right',

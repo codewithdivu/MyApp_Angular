@@ -12,6 +12,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { SpinnerLoadingComponent } from '../../Common/spinner-loading/spinner-loading.component';
 import { PATH_AUTH } from '../../../Constants/path';
 import { CommonModule } from '@angular/common';
+import { AuthServiceService } from '../../../Services/auth-service.service';
 
 @Component({
   selector: 'app-forgot-password',
@@ -32,6 +33,7 @@ export class ForgotPasswordComponent {
   };
 
   constructor(
+    private authService: AuthServiceService,
     private formBuilder: FormBuilder,
     private http: HttpClient,
     private router: Router,
@@ -48,29 +50,22 @@ export class ForgotPasswordComponent {
       this.spinner.show();
       const formData = this.forgotPasswordForm.value;
       setTimeout(() => {
-        this.http
-          .post('http://localhost:8888/api/v1/auth/forgot-password', {
-            email: formData.email,
-          })
-          .subscribe(
-            (res: any) => {
-              console.log('res', res);
-              if (res.success) {
-                localStorage.setItem('forgotPasswordEmail', formData.email);
-                this.toastService.success(res.msg);
-                this.spinner.hide();
-                this.router.navigate([PATH_AUTH.resetPassword]);
-              } else {
-                this.toastService.error(res.msg);
-                this.spinner.hide();
-              }
-            },
-            (error: HttpErrorResponse) => {
-              this.toastService.error(error.error.msg);
-              console.log('error', error);
-              this.spinner.hide();
+        this.authService.forgotPassword(formData.email).subscribe(
+          (res: any) => {
+            if (res.success) {
+              this.toastService.success(res.msg);
+              this.router.navigate([PATH_AUTH.resetPassword]);
+            } else {
+              this.toastService.error(res.msg);
             }
-          );
+            this.spinner.hide();
+          },
+          (error: any) => {
+            this.toastService.error(error.error.msg);
+            console.log('error', error);
+            this.spinner.hide();
+          }
+        );
       }, 1000);
     } else {
       this.forgotPasswordForm.markAllAsTouched();

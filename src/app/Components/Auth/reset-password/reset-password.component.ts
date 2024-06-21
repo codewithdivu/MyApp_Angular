@@ -12,6 +12,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { HotToastService } from '@ngxpert/hot-toast';
 import { PATH_AUTH } from '../../../Constants/path';
 import { CommonModule } from '@angular/common';
+import { AuthServiceService } from '../../../Services/auth-service.service';
 
 @Component({
   selector: 'app-reset-password',
@@ -52,6 +53,7 @@ export class ResetPasswordComponent {
     },
   };
   constructor(
+    private authService: AuthServiceService,
     private formBuilder: FormBuilder,
     private http: HttpClient,
     private router: Router,
@@ -94,26 +96,23 @@ export class ResetPasswordComponent {
       ].join('');
 
       setTimeout(() => {
-        this.http
-          .post('http://localhost:8888/api/v1/auth/reset-password', {
+        this.authService
+          .resetPassword({
             email: formData.email,
             newPassword: formData.newPassword,
             otp: Number(otp),
           })
           .subscribe(
             (res: any) => {
-              console.log('res', res);
               if (res.success) {
-                localStorage.removeItem('forgotPasswordEmail');
                 this.toastService.success(res.msg);
-                this.spinner.hide();
                 this.router.navigate([PATH_AUTH.signin]);
               } else {
                 this.toastService.error(res.msg);
-                this.spinner.hide();
               }
+              this.spinner.hide();
             },
-            (error: HttpErrorResponse) => {
+            (error: any) => {
               this.toastService.error(error.error.msg);
               console.log('error', error);
               this.spinner.hide();

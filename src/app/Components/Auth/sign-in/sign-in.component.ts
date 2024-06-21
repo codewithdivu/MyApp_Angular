@@ -12,6 +12,7 @@ import { NgxSpinner, NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { SpinnerLoadingComponent } from '../../Common/spinner-loading/spinner-loading.component';
 import { PATH_DASHBOARD } from '../../../Constants/path';
 import { CommonModule } from '@angular/common';
+import { AuthServiceService } from '../../../Services/auth-service.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -35,6 +36,7 @@ export class SignInComponent {
   };
 
   constructor(
+    private authService: AuthServiceService,
     private formBuilder: FormBuilder,
     private http: HttpClient,
     private router: Router,
@@ -53,8 +55,8 @@ export class SignInComponent {
       this.spinner.show();
       const loginData = this.signinForm.value;
       setTimeout(() => {
-        this.http
-          .post('http://localhost:8888/api/v1/auth/login', {
+        this.authService
+          .login({
             email: loginData.email,
             password: loginData.password,
           })
@@ -62,17 +64,14 @@ export class SignInComponent {
             (res: any) => {
               console.log('res', res);
               if (res.success) {
-                localStorage.setItem('accessToken', res.accessToken);
-                localStorage.setItem('myAppAuth', JSON.stringify(res.data));
                 this.toastService.success(res.msg);
-                this.spinner.hide();
                 this.router.navigate([PATH_DASHBOARD.root]);
               } else {
                 this.toastService.error(res.msg);
-                this.spinner.hide();
               }
+              this.spinner.hide();
             },
-            (error: HttpErrorResponse) => {
+            (error: any) => {
               this.toastService.error(error.error.msg);
               console.log('error', error);
               this.spinner.hide();
