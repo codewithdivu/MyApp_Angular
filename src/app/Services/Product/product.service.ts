@@ -6,20 +6,26 @@ import {
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { API_ROUTES, HOST_API } from '../../Constants/apiRoutes';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
-  private apiUrl = 'http://localhost:8888/api/v1/product';
 
   constructor(private http: HttpClient) {}
 
   getAllProducts(): Observable<any[]> {
     return this.http
-      .get<any[]>(`${this.apiUrl}`)
+      .get<any[]>(HOST_API+API_ROUTES.PRODUCT.GET_ALL_PRODUCT)
       .pipe(catchError(this.handleError));
   }
+
+  getProduct(id:string):Observable<any>{
+    return this.http.get<any>(HOST_API+API_ROUTES.PRODUCT.GET_PRODUCT.replace(":id",id))
+  }
+
+
 
   private handleError(error: HttpErrorResponse) {
     let errorMessage = 'Unknown error!';

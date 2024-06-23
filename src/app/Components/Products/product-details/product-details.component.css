@@ -1,0 +1,40 @@
+.carousel-item img {
+  max-height: 500px;
+  object-fit: cover;
+}
+
+.product-details {
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin: 10px 0;
+}
+
+.in-stock-label {
+  color: white;
+  padding: 5px 10px;
+  font-size: 12px;
+  border-radius: 5px;
+}
+
+.bg-success {
+  background-color: green;
+}
+
+.bg-danger {
+  background-color: red;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.quantity-controls button {
+  margin: 0 5px;
+}
+
+.rating {
+  color: gold;
+  margin-bottom: 15px;
+}

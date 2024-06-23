@@ -7,36 +7,10 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [SpinnerLoadingComponent, CommonModule],
+  imports: [],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
 export class HomeComponent {
-  products: any[] = [];
 
-  constructor(
-    private productService: ProductService,
-    private spinner: NgxSpinnerService
-  ) {}
-
-  ngOnInit() {
-    this.loadProducts();
-  }
-
-  loadProducts() {
-    this.spinner.show();
-    setTimeout(() => {
-      this.productService.getAllProducts().subscribe(
-        (data: any) => {
-          this.products = data;
-          console.log('data', data);
-          this.spinner.hide();
-        },
-        (error: any) => {
-          console.error('Error fetching products:', error);
-          this.spinner.hide();
-        }
-      );
-    }, 2000);
-  }
 }

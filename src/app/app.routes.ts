@@ -8,6 +8,8 @@ import { HomeComponent } from './Components/Dashboard/home/home.component';
 import { ForgotPasswordComponent } from './Components/Auth/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './Components/Auth/reset-password/reset-password.component';
 import { NotFoundComponent } from './Components/Common/not-found/not-found.component';
+import { ProductDetailsComponent } from './Components/Products/product-details/product-details.component';
+import { ProductListComponent } from './Components/Products/product-list/product-list.component';
 
 export const routes: Routes = [
   {
@@ -54,6 +56,16 @@ export const routes: Routes = [
         pathMatch: 'full',
         title: 'Home',
       },
+      {
+        path:'products',
+        component:ProductListComponent,
+        title:"Product List"
+      },
+      {
+        path:'products/:id',
+        component:ProductDetailsComponent,
+        title:"Product Detail"        
+      }
     ],
   },
   // Not-Found

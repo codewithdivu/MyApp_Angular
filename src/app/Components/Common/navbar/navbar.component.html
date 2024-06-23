@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd">
+<!-- <nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">MyApp</a>
     <button
@@ -28,6 +28,76 @@
       <button class="btn btn-outline-primary" (click)="handleLogout()">
         Logout
       </button>
+    </div>
+  </div>
+</nav> -->
+
+<style>
+  .navbar-brand img {
+    height: 40px;
+  }
+  .navbar-avatar {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+  }
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">
+    <img
+      src="https://cdn6.aptoide.com/imgs/0/1/a/01a72829c50527e432951c557d8c6977_icon.png"
+      alt="Logo"
+    />
+  </a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarNav"
+    aria-controls="navbarNav"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="#">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">About</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Contact</a>
+      </li>
+    </ul>
+    <div class="dropdown">
+      <a
+        href="#"
+        class="d-block"
+        id="navbarDropdown"
+        role="button"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        <img
+          src="https://via.placeholder.com/40"
+          alt="Avatar"
+          class="navbar-avatar"
+        />
+      </a>
+      <div
+        class="dropdown-menu dropdown-menu-right"
+        aria-labelledby="navbarDropdown"
+      >
+        <a class="dropdown-item" href="#">Home</a>
+        <a class="dropdown-item" href="#">Account</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">Logout</a>
+      </div>
     </div>
   </div>
 </nav>
