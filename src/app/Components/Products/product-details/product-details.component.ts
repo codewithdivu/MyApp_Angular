@@ -19,6 +19,23 @@ import * as CartActions from '../../../../store/actions/cart.actions';
 export class ProductDetailsComponent {
   product: any;
   productId!:string;
+  quantityCount: number = 1; 
+
+  updateInputValue(event: Event) {
+    const newValue = (event.target as HTMLInputElement).value;
+    this.quantityCount = +newValue; 
+  }
+
+  increment() {
+    this.quantityCount++;
+  }
+
+  decrement() {
+    if (this.quantityCount > 1) {
+      this.quantityCount--;
+    }
+  }
+
 
   constructor(
     private productService: ProductService,
@@ -38,8 +55,8 @@ export class ProductDetailsComponent {
     });
   }
 
-  addProduct(productId: string): void {
-    this.store.dispatch(CartActions.addProductToCart({ productId, quantity: 1 }));
+  addProduct(productId: string,quantityNum:number): void {
+    this.store.dispatch(CartActions.addProductToCart({ productId, quantity: quantityNum }));
   }
 
   
