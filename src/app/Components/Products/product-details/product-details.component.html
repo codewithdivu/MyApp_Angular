@@ -1,4 +1,4 @@
-<app-spinner-loading></app-spinner-loading>
+<app-spinner-loading></app-spinner-loading> -->
 
 <div class="container my-4">
   <div style="margin-bottom: 2rem">
@@ -27,8 +27,9 @@
       </ol>
     </nav>
   </div>
+
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-7">
       <div
         id="carouselExampleIndicators"
         class="carousel slide"
@@ -87,35 +88,144 @@
       </div>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-5">
       <div class="product-details">
-        <h2>Product Title</h2>
-        <div class="in-stock-label bg-success" style="width: 68px">
-          In Stock
+        <span class="badge bg-primary text-light mb-2">NEW</span>
+        <div class="mt-2 mb-1 text-uppercase text-primary">IN STOCK</div>
+        <h2 class="mb-3">Product Title</h2>
+        <h4 class="rating mb-3">★★★★☆</h4>
+        <h4 class="text-muted mb-3">$299.99</h4>
+        <hr />
+        <div
+          style="
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+          "
+          class="mb-3 mt-4"
+        >
+          <p>Quantity</p>
+          <div class="quantity-controls mb-3">
+            <button class="btn btn-outline-secondary">-</button>
+            <input
+              type="text"
+              class="form-control d-inline mx-2"
+              value="1"
+              style="width: 50px; text-align: center"
+            />
+            <button class="btn btn-outline-secondary">+</button>
+          </div>
         </div>
-        <div class="rating">★★★★☆</div>
 
-        <p class="text-muted">$299.99</p>
-        <p>
-          Product description goes here. Lorem ipsum dolor sit amet, consectetur
-          adipiscing elit. Proin vel urna at dolor gravida laoreet.
-        </p>
+        <hr />
+        <!-- <div
+          class="button-group mt-5"
+          style="display: flex; justify-content: space-around"
+        >
+          <button class="btn btn-primary mr-2">
+            <i class="fas fa-cart-plus"></i> Add to Cart
+          </button>
+          <button class="btn btn-success">Buy Now</button>
+        </div> -->
 
-        <div class="quantity-controls">
-          <button class="btn btn-outline-secondary">-</button>
-          <input
-            type="text"
-            class="form-control"
-            value="1"
-            style="width: 50px; text-align: center"
-          />
-          <button class="btn btn-outline-secondary">+</button>
+        <div class="d-flex gap-2 mt-5">
+          <button
+            type="button"
+            class="btn btn-primary btn-lg w-100 bg-warning text-black"
+            (click)="addProduct(productId)"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="25"
+              height="25"
+              fill="currentColor"
+              class="bi bi-cart"
+              viewBox="0 0 16 16"
+              style="margin-top: -0.4rem"
+            >
+              <path
+                d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"
+              />
+            </svg>
+            Add To Cart
+          </button>
+
+          <button type="button" class="btn btn-lg btn-primary w-100">
+            <svg
+              class="iconify"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="25"
+              height="25"
+              style="margin-top: -0.4rem"
+            >
+              <path d="M16 14h-4v4h-2v-4H8v-2h4V8h2v4h4z" fill="currentColor" />
+            </svg>
+            Buy Now
+          </button>
         </div>
-
-        <button class="btn btn-primary">
-          <i class="fas fa-cart-plus"></i> Add to Cart
-        </button>
-        <button class="btn btn-success">Buy Now</button>
+      </div>
+    </div>
+  </div>
+  <div class="row" style="margin-top: 5rem">
+    <div class="col-12 col-md-4 mb-4">
+      <div class="text-center" style="max-width: 280px; margin: auto">
+        <div class="icon-wrapper mb-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-patch-check-fill"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708"
+            />
+          </svg>
+        </div>
+        <h6 class="mb-2">100% Original</h6>
+        <p class="text-muted">Product is 100% original and authentic.</p>
+      </div>
+    </div>
+    <div class="col-12 col-md-4 mb-4">
+      <div class="text-center" style="max-width: 280px; margin: auto">
+        <div class="icon-wrapper mb-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-stopwatch-fill"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M6.5 0a.5.5 0 0 0 0 1H7v1.07A7.001 7.001 0 0 0 8 16a7 7 0 0 0 5.29-11.584l.013-.012.354-.354.353.354a.5.5 0 1 0 .707-.707l-1.414-1.415a.5.5 0 1 0-.707.707l.354.354-.354.354-.012.012A6.97 6.97 0 0 0 9 2.071V1h.5a.5.5 0 0 0 0-1zm2 5.6V9a.5.5 0 0 1-.5.5H4.5a.5.5 0 0 1 0-1h3V5.6a.5.5 0 1 1 1 0"
+            />
+          </svg>
+        </div>
+        <h6 class="mb-2">10 Day Replacement</h6>
+        <p class="text-muted">You can replace the product within 10 days.</p>
+      </div>
+    </div>
+    <div class="col-12 col-md-4 mb-4">
+      <div class="text-center" style="max-width: 280px; margin: auto">
+        <div class="icon-wrapper mb-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-file-check-fill"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2m-1.146 6.854-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 8.793l2.646-2.647a.5.5 0 0 1 .708.708"
+            />
+          </svg>
+        </div>
+        <h6 class="mb-2">Year Warranty</h6>
+        <p class="text-muted">The product comes with a one-year warranty.</p>
       </div>
     </div>
   </div>

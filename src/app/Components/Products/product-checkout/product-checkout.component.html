@@ -1,0 +1,155 @@
+<div class="container mt-5">
+  <div style="margin-bottom: 2rem">
+    <h2 class="mb-3">Checkout</h2>
+    <nav
+      style="
+        --bs-breadcrumb-divider: url(
+          &#34;data:image/svg + xml,
+          %3Csvgxmlns='http://www.w3.org/2000/svg'width='8'height='8'%3E%3Cpathd='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z'fill='%236c757d'/%3E%3C/svg%3E&#34;
+        );
+      "
+      aria-label="breadcrumb"
+    >
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="/dashboard" style="text-decoration: none">Home</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a href="/dashboard/products" style="text-decoration: none"
+            >Products</a
+          >
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+      </ol>
+    </nav>
+  </div>
+
+  <div
+    *ngIf="loading$ | async"
+    class="alert alert-info text-center"
+    role="alert"
+  >
+    Loading...
+  </div>
+
+  <div *ngIf="error$ | async as error" class="alert alert-danger" role="alert">
+    Error: {{ error }}
+  </div>
+
+  <div
+    *ngIf="(cart$ | async)?.length === 0"
+    class="alert alert-warning text-center"
+    role="alert"
+  >
+    Your cart is empty.
+  </div>
+
+  <div class="row">
+    <div class="col-md-9">
+      <h2>Product List</h2>
+      <div class="card">
+        <div class="card-body">
+          <div class="row mb-3">
+            <div class="col-md-2"><strong>Image</strong></div>
+            <div class="col-md-3"><strong>Name</strong></div>
+            <div class="col-md-2"><strong>Price</strong></div>
+            <div class="col-md-2"><strong>Quantity</strong></div>
+            <div class="col-md-2"><strong>Total</strong></div>
+            <div class="col-md-1"><strong>Action</strong></div>
+          </div>
+          <div
+            class="row mb-2 align-items-center"
+            *ngFor="let item of cart$ | async"
+          >
+            <div class="col-md-2">
+              <img
+                [src]="item.images[0]"
+                class="img-fluid"
+                alt="Product Image"
+              />
+            </div>
+            <div class="col-md-3">{{ item.name }}</div>
+            <div class="col-md-2">${{ item.price }}</div>
+            <div class="col-md-2">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <button
+                    class="btn btn-outline-secondary"
+                    type="button"
+                    (click)="decrementQuantity(item._id)"
+                    [disabled]="item.quantity === 1"
+                  >
+                    -
+                  </button>
+                </div>
+                <h1>{{ item.quantity }}</h1>
+                <!-- <input
+                  type="text"
+                  class="form-control text-center"
+                  [value]="item.quantity"
+                /> -->
+                <div class="input-group-append">
+                  <button
+                    class="btn btn-outline-secondary"
+                    type="button"
+                    (click)="incrementQuantity(item._id)"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2">$50.00</div>
+            <div class="col-md-1">
+              <button
+                class="btn btn-danger btn-sm"
+                (click)="removeProduct(item._id)"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-archive-fill"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15zM5.5 7h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1M.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8z"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card">
+        <div class="card-body">
+          <h2>Order Summary</h2>
+          <div class="row mb-3">
+            <div class="col-md-6"><strong>Subtotal:</strong></div>
+            <div class="col-md-6 text-right">$100.00</div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-6"><strong>Discount:</strong></div>
+            <div class="col-md-6 text-right">$0.00</div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-6"><strong>Shipping:</strong></div>
+            <div class="col-md-6 text-right">$10.00</div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-6"><strong>Total:</strong></div>
+            <div class="col-md-6 text-right">$110.00</div>
+          </div>
+          <hr />
+          <button class="btn btn-primary btn-block">Proceed to Checkout</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div *ngIf="!(loading$ | async) && !(error$ | async)"></div> -->

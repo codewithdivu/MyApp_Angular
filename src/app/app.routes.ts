@@ -10,6 +10,7 @@ import { ResetPasswordComponent } from './Components/Auth/reset-password/reset-p
 import { NotFoundComponent } from './Components/Common/not-found/not-found.component';
 import { ProductDetailsComponent } from './Components/Products/product-details/product-details.component';
 import { ProductListComponent } from './Components/Products/product-list/product-list.component';
+import { ProductCheckoutComponent } from './Components/Products/product-checkout/product-checkout.component';
 
 export const routes: Routes = [
   {
@@ -65,6 +66,11 @@ export const routes: Routes = [
         path:'products/:id',
         component:ProductDetailsComponent,
         title:"Product Detail"        
+      },
+      {
+        path:'checkout',
+        component:ProductCheckoutComponent,
+        title:"Cart Checkout"
       }
     ],
   },

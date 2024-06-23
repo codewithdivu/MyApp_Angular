@@ -5,6 +5,10 @@ import { CommonModule } from '@angular/common';
 import { SpinnerLoadingComponent } from '../../Common/spinner-loading/spinner-loading.component';
 import { Router } from '@angular/router';
 import { PATH_DASHBOARD } from '../../../Constants/path';
+import { CartState } from '../../../../store/reducers/cart.reducer';
+import { Store } from '@ngrx/store';
+import * as CartActions from '../../../../store/actions/cart.actions';
+
 
 @Component({
   selector: 'app-product-list',
@@ -27,6 +31,7 @@ export class ProductListComponent {
     private productService: ProductService,
     private spinner: NgxSpinnerService,
     private router: Router,
+    private store: Store<{ cart: CartState }>
   ) {
    
   }
@@ -50,6 +55,10 @@ export class ProductListComponent {
         }
       );
     }, 500);
+  }
+
+  addProduct(productId: string): void {
+    this.store.dispatch(CartActions.addProductToCart({ productId, quantity: 1 }));
   }
 
   onSearch(event: Event) {

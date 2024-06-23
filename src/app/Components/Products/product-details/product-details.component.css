@@ -38,3 +38,11 @@
   color: gold;
   margin-bottom: 15px;
 }
+
+.icon-wrapper {
+  display: inline-block;
+  padding: 10px;
+  border-radius: 50%;
+  background-color: #f5f5f5;
+  margin-bottom: 16px;
+}

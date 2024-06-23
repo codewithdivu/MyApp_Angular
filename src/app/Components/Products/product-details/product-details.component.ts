@@ -1,9 +1,13 @@
+import { Store } from '@ngrx/store';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ProductService } from '../../../Services/Product/product.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { SpinnerLoadingComponent } from '../../Common/spinner-loading/spinner-loading.component';
+import { CartState } from '../../../../store/reducers/cart.reducer';
+import * as CartActions from '../../../../store/actions/cart.actions';
+
 
 @Component({
   selector: 'app-product-details',
@@ -16,16 +20,15 @@ export class ProductDetailsComponent {
   product: any;
   productId!:string;
 
-
   constructor(
     private productService: ProductService,
     private spinner: NgxSpinnerService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private store: Store<{ cart: CartState }>
   ) {
     
   }
-
 
   ngOnInit() {
     
@@ -33,6 +36,10 @@ export class ProductDetailsComponent {
       this.productId = params['id'];
       this.loadProduct(this.productId);
     });
+  }
+
+  addProduct(productId: string): void {
+    this.store.dispatch(CartActions.addProductToCart({ productId, quantity: 1 }));
   }
 
   
