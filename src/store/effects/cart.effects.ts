@@ -45,27 +45,49 @@ export class CartEffects {
     )
   );
 
-  incrementProductQuantity$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(CartActions.incrementProductQuantity),
-      mergeMap(({ productId }) =>
-        this.cartService.incrementProductQuantity(productId).pipe(
-          map(() => CartActions.updateProductQuantitySuccess({ productId, quantity: 1 })),
-          catchError(error => of(CartActions.cartError({ error })))
-        )
-      )
-    )
-  );
+  // incrementProductQuantity$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(CartActions.incrementProductQuantity),
+  //     mergeMap(({ productId }) =>
+  //       this.cartService.incrementProductQuantity(productId).pipe(
+  //         map(() => CartActions.updateProductQuantitySuccess({ productId, quantity: 1 })),
+  //         catchError(error => of(CartActions.cartError({ error })))
+  //       )
+  //     )
+  //   )
+  // );
 
-  decrementProductQuantity$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(CartActions.decrementProductQuantity),
-      mergeMap(({ productId }) =>
-        this.cartService.decrementProductQuantity(productId).pipe(
-          map(() => CartActions.updateProductQuantitySuccess({ productId, quantity: -1 })),
-          catchError(error => of(CartActions.cartError({ error })))
-        )
+  // decrementProductQuantity$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(CartActions.decrementProductQuantity),
+  //     mergeMap(({ productId }) =>
+  //       this.cartService.decrementProductQuantity(productId).pipe(
+  //         map(() => CartActions.updateProductQuantitySuccess({ productId, quantity: -1 })),
+  //         catchError(error => of(CartActions.cartError({ error })))
+  //       )
+  //     )
+  //   )
+  // );
+
+  incrementProductQuantity$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(CartActions.incrementProductQuantity),
+    mergeMap(({ productId }) =>
+      this.cartService.incrementProductQuantity(productId).pipe(
+        map(() => CartActions.incrementProductQuantitySuccess({ productId })),
+        catchError(error => of(CartActions.cartError({ error })))
       )
     )
-  );
+));
+
+decrementProductQuantity$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(CartActions.decrementProductQuantity),
+    mergeMap(({ productId }) =>
+      this.cartService.decrementProductQuantity(productId).pipe(
+        map(() => CartActions.decrementProductQuantitySuccess({ productId })),
+        catchError(error => of(CartActions.cartError({ error })))
+      )
+    )
+));
 }

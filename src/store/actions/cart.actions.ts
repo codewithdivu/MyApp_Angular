@@ -17,10 +17,16 @@ export const incrementProductQuantity = createAction(
   props<{ productId: string }>()
 );
 
+export const incrementProductQuantitySuccess = createAction('[Cart] Increment Product Quantity Success', props<{ productId: string }>());
+
+
 export const decrementProductQuantity = createAction(
   '[Cart] Decrement Product Quantity',
   props<{ productId: string }>()
 );
+
+export const decrementProductQuantitySuccess = createAction('[Cart] Decrement Product Quantity Success', props<{ productId: string }>());
+
 
 export const fetchCartSuccess = createAction(
   '[Cart] Fetch Cart Success',

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, tap } from 'rxjs';
+import { Observable, map, tap } from 'rxjs';
 import { CartState } from '../../../../store/reducers/cart.reducer';
 import * as CartActions from '../../../../store/actions/cart.actions';
 import { CommonModule } from '@angular/common';
@@ -17,6 +17,9 @@ export class ProductCheckoutComponent {
   cart$: Observable<any>;
   loading$: Observable<boolean>;
   error$: Observable<any>;
+  subtotal$: Observable<number>;
+  total$: Observable<number>;
+
 
   constructor(private store: Store<{ cart: CartState }>) {
     this.cart$ = this.store.select(state => state.cart.items).pipe(
@@ -29,7 +32,12 @@ export class ProductCheckoutComponent {
       tap(error => console.log('Error:', error))
     );
     console.log('this.cart$ :>> ', this.cart$);
-  }
+    this.subtotal$ = this.cart$.pipe(
+      map(items => items.reduce((sum:any, item:any) => sum + (item.price * item.quantity), 0))
+    );
+    this.total$ = this.subtotal$.pipe(
+      map(subtotal => subtotal + 10)
+    );  }
 
   ngOnInit(): void {
     this.store.dispatch(CartActions.fetchCart());

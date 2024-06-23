@@ -30,6 +30,7 @@ export class NavbarComponent {
     if (localStorage.getItem('myAppAuth')) {
       const user: any = JSON.parse(localStorage.getItem('myAppAuth')!);
       this.user = user;
+      console.log('this.user :>> ', this.user);
     }
 
     this.cart$ = this.store.select(state => state.cart.items).pipe(

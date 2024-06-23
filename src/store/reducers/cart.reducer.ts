@@ -32,12 +32,26 @@ export const cartReducer = createReducer(
   })),
   on(CartActions.removeProductFromCartSuccess, (state, { productId }) => ({
     ...state,
-    items: state.items.filter(item => item.productId !== productId),
+    items: state.items.filter(item => item._id !== productId),
     loading: false,
   })),
-  on(CartActions.updateProductQuantitySuccess, (state, { productId, quantity }) => ({
+  // on(CartActions.updateProductQuantitySuccess, (state, { productId, quantity }) => ({
+  //   ...state,
+  //   items: state.items.map(item => item._id === productId ? { ...item, quantity } : item),
+  //   loading: false,
+  // })),
+  on(CartActions.incrementProductQuantitySuccess, (state, { productId }) => ({
     ...state,
-    items: state.items.map(item => item.productId === productId ? { ...item, quantity } : item),
+    items: state.items.map(item => 
+      item._id === productId ? { ...item, quantity: item.quantity + 1 } : item
+    ),
+    loading: false,
+  })),
+  on(CartActions.decrementProductQuantitySuccess, (state, { productId }) => ({
+    ...state,
+    items: state.items.map(item => 
+      item._id === productId ? { ...item, quantity: item.quantity - 1 } : item
+    ),
     loading: false,
   })),
   on(CartActions.cartError, (state, { error }) => ({

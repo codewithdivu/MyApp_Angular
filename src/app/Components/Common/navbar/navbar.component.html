@@ -64,33 +64,15 @@
       </a>
 
       <!-- Avatar -->
-      <a
-        href="#"
-        class="d-block"
-        id="navbarDropdown"
-        role="button"
-        data-toggle="dropdown"
-        aria-haspopup="true"
-        aria-expanded="false"
-      >
-        <img
-          src="https://imgs.search.brave.com/krZrIMLjoTo3D3dR5vf9XgssHNSX4qXELUw5h7N7_iM/rs:fit:500:0:0/g:ce/aHR0cHM6Ly92aXNh/Zm90by5jb20vaW1n/L2F1c3RyYWxpYS1w/YXNzcG9ydC1waG90/by1leGFtcGxlMi53/ZWJw"
-          alt="Avatar"
-          class="navbar-avatar"
-          height="50px"
-          width="50px"
-          style="border-radius: 50%"
-        />
-      </a>
-      <div
-        class="dropdown-menu dropdown-menu-right"
-        aria-labelledby="navbarDropdown"
-      >
-        <a class="dropdown-item" href="#">Home</a>
-        <a class="dropdown-item" href="#">Account</a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">Logout</a>
-      </div>
+
+      <img
+        [src]="user.photoURL"
+        alt="Avatar"
+        class="navbar-avatar"
+        height="50px"
+        width="50px"
+        style="border-radius: 50%"
+      />
     </div>
   </div>
 </nav>

@@ -83,11 +83,7 @@
                   </button>
                 </div>
                 <h1>{{ item.quantity }}</h1>
-                <!-- <input
-                  type="text"
-                  class="form-control text-center"
-                  [value]="item.quantity"
-                /> -->
+
                 <div class="input-group-append">
                   <button
                     class="btn btn-outline-secondary"
@@ -99,7 +95,9 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-2">$50.00</div>
+            <div class="col-md-2">
+              {{ item.quantity * item.price | number : "1.2-2" }}
+            </div>
             <div class="col-md-1">
               <button
                 class="btn btn-danger btn-sm"
@@ -130,7 +128,9 @@
           <h2>Order Summary</h2>
           <div class="row mb-3">
             <div class="col-md-6"><strong>Subtotal:</strong></div>
-            <div class="col-md-6 text-right">$100.00</div>
+            <div class="col-md-6 text-right">
+              {{ subtotal$ | async | currency }}
+            </div>
           </div>
           <div class="row mb-3">
             <div class="col-md-6"><strong>Discount:</strong></div>
@@ -142,7 +142,9 @@
           </div>
           <div class="row mb-3">
             <div class="col-md-6"><strong>Total:</strong></div>
-            <div class="col-md-6 text-right">$110.00</div>
+            <div class="col-md-6 text-right">
+              {{ total$ | async | currency }}
+            </div>
           </div>
           <hr />
           <button class="btn btn-primary btn-block">Proceed to Checkout</button>
