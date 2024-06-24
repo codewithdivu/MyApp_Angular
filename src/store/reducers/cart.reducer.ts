@@ -40,11 +40,6 @@ export const cartReducer = createReducer(
     items: state.items.filter(item => item._id !== productId),
     loading: false,
   })),
-  // on(CartActions.updateProductQuantitySuccess, (state, { productId, quantity }) => ({
-  //   ...state,
-  //   items: state.items.map(item => item._id === productId ? { ...item, quantity } : item),
-  //   loading: false,
-  // })),
   on(CartActions.incrementProductQuantitySuccess, (state, { productId }) => ({
     ...state,
     items: state.items.map(item => 

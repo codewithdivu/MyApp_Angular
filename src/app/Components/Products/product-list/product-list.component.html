@@ -16,7 +16,7 @@
         <li class="breadcrumb-item">
           <a href="/dashboard" style="text-decoration: none">Home</a>
         </li>
-        <li class="breadcrumb-item active" aria-current="page">Library</li>
+        <li class="breadcrumb-item active" aria-current="page">Products</li>
       </ol>
     </nav>
   </div>
@@ -81,7 +81,11 @@
           {{ product.name }}
         </h5>
         <p class="text-muted">{{ product.price | currency }}</p>
-        <button class="btn btn-primary" (click)="addProduct(product._id)">
+        <button
+          class="btn btn-primary"
+          (click)="addProduct(product._id)"
+          [disabled]="!product.inStock"
+        >
           Add to Cart
         </button>
       </div>

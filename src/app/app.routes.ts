@@ -13,6 +13,8 @@ import { ProductListComponent } from './Components/Products/product-list/product
 import { ProductCheckoutComponent } from './Components/Products/product-checkout/product-checkout.component';
 import { ProductBillingComponent } from './Components/Products/product-billing/product-billing.component';
 import { ProductAddressComponent } from './Components/Products/product-address/product-address.component';
+import { ContactComponent } from './Components/Dashboard/contact/contact.component';
+import { AboutComponent } from './Components/Dashboard/about/about.component';
 
 export const routes: Routes = [
   {
@@ -55,15 +57,16 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        component: HomeComponent,
+        component: ProductListComponent,
         pathMatch: 'full',
         title: 'Home',
       },
-      {
-        path:'products',
-        component:ProductListComponent,
-        title:"Product List"
-      },
+      // {
+      //   path:'products',
+      //   component:ProductListComponent,
+      //   pathMatch: 'full',
+      //   title:"Product List"
+      // },
       {
         path:'products/:id',
         component:ProductDetailsComponent,
@@ -83,7 +86,17 @@ export const routes: Routes = [
         path:'billing',
         component:ProductBillingComponent,
         title:"Order Billing"
-      }
+      },
+      {
+        path:'contact-us',
+        component:ContactComponent,
+        title:"Contact Us"
+      },
+      {
+        path:'about',
+        component:AboutComponent,
+        title:"About"
+      },
     ],
   },
   // Not-Found

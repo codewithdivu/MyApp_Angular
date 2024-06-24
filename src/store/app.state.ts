@@ -1,4 +1,3 @@
-// app.state.ts
 
 import { CartState } from './reducers/cart.reducer';
 

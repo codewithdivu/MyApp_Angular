@@ -57,7 +57,7 @@ export class ProductBillingComponent {
 
 
   placdeOrder(){
-    this.router.navigate([PATH_DASHBOARD.general.products])
+    this.router.navigate([PATH_DASHBOARD])
     this.store.dispatch(CartActions.emptyCart())
     localStorage.removeItem("CheckOutAddress")
   }
