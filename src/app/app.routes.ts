@@ -11,6 +11,7 @@ import { NotFoundComponent } from './Components/Common/not-found/not-found.compo
 import { ProductDetailsComponent } from './Components/Products/product-details/product-details.component';
 import { ProductListComponent } from './Components/Products/product-list/product-list.component';
 import { ProductCheckoutComponent } from './Components/Products/product-checkout/product-checkout.component';
+import { ProductBillingComponent } from './Components/Products/product-billing/product-billing.component';
 
 export const routes: Routes = [
   {
@@ -71,6 +72,11 @@ export const routes: Routes = [
         path:'checkout',
         component:ProductCheckoutComponent,
         title:"Cart Checkout"
+      },
+      {
+        path:'billing',
+        component:ProductBillingComponent,
+        title:"Cart Billing"
       }
     ],
   },

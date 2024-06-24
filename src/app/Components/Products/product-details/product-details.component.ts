@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { SpinnerLoadingComponent } from '../../Common/spinner-loading/spinner-loading.component';
 import { CartState } from '../../../../store/reducers/cart.reducer';
 import * as CartActions from '../../../../store/actions/cart.actions';
+import { PATH_DASHBOARD } from '../../../Constants/path';
 
 
 @Component({
@@ -48,7 +49,6 @@ export class ProductDetailsComponent {
   }
 
   ngOnInit() {
-    
     this.route.params.subscribe(params => {
       this.productId = params['id'];
       this.loadProduct(this.productId);
@@ -56,7 +56,8 @@ export class ProductDetailsComponent {
   }
 
   addProduct(productId: string,quantityNum:number): void {
-    this.store.dispatch(CartActions.addProductToCart({ productId, quantity: quantityNum }));
+      this.store.dispatch(CartActions.addProductToCart({ productId, quantity: quantityNum }));
+      this.router.navigate([PATH_DASHBOARD.general.checkout])
   }
 
   
