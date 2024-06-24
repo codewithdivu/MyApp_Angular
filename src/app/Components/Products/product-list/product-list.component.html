@@ -72,6 +72,8 @@
           [src]="product.images[0]"
           class="img-fluid product-img"
           [alt]="product.name"
+          style="cursor: pointer"
+          (click)="seeProductDetails(product._id)"
         />
         <h5
           class="mt-3"

@@ -24,28 +24,32 @@
 
   <div
     *ngIf="loading$ | async"
-    class="alert alert-info text-center"
-    role="alert"
+    class="spinner-border"
+    style="width: 5rem; height: 5rem"
+    role="status"
   >
-    Loading...
-  </div>
-
-  <div *ngIf="error$ | async as error" class="alert alert-danger" role="alert">
-    Error: {{ error }}
+    <span class="visually-hidden">Loading...</span>
   </div>
 
   <div
     *ngIf="(cart$ | async)?.length === 0"
-    class="alert alert-warning text-center"
-    role="alert"
+    style="
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    "
   >
-    Your cart is empty.
+    <img
+      src="../../../../assets/Images/empty_cart.svg"
+      height="500"
+      width="500"
+    />
+    <h1>Cart is Empty</h1>
   </div>
-
-  <div class="row">
+  <div class="row" *ngIf="(cart$ | async)?.length !== 0">
     <div class="col-md-9">
       <div class="product-list-container">
-        <h2>Product List</h2>
         <div class="card">
           <div class="card-body">
             <div class="row mb-3">
@@ -56,6 +60,7 @@
               <div class="col-md-2"><strong>Total</strong></div>
               <div class="col-md-1"><strong>Action</strong></div>
             </div>
+
             <div
               class="row mb-2 align-items-center"
               *ngFor="let item of cart$ | async"
@@ -81,7 +86,16 @@
                       -
                     </button>
                   </div>
-                  <h1>{{ item.quantity }}</h1>
+                  <p
+                    style="
+                      font-size: 1.3rem;
+                      margin-left: 8px;
+                      margin-right: 8px;
+                      margin-top: 3px;
+                    "
+                  >
+                    {{ item.quantity }}
+                  </p>
                   <div class="input-group-append">
                     <button
                       class="btn btn-outline-secondary"
