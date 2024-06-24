@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, map, tap } from 'rxjs';
 import { CartState } from '../../../../store/reducers/cart.reducer';
@@ -6,6 +6,7 @@ import * as CartActions from '../../../../store/actions/cart.actions';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { PATH_DASHBOARD } from '../../../Constants/path';
+import { HotToastService } from '@ngxpert/hot-toast';
 
 
 @Component({
@@ -16,6 +17,8 @@ import { PATH_DASHBOARD } from '../../../Constants/path';
   styleUrl: './product-checkout.component.css'
 })
 export class ProductCheckoutComponent {
+  private toastService = inject(HotToastService);
+
   cart$: Observable<any>;
   loading$: Observable<boolean>;
   error$: Observable<any>;
@@ -52,6 +55,7 @@ export class ProductCheckoutComponent {
 
   removeProduct(productId: string): void {
     this.store.dispatch(CartActions.removeProductFromCart({ productId }));
+    this.toastService.success("Product Removed Successfully.");
   }
 
   incrementQuantity(productId: string): void {

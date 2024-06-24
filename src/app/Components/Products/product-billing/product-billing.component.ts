@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable, map, tap } from 'rxjs';
@@ -7,6 +7,7 @@ import { CartState } from '../../../../store/reducers/cart.reducer';
 import { Router } from '@angular/router';
 import * as CartActions from '../../../../store/actions/cart.actions';
 import { PATH_DASHBOARD } from '../../../Constants/path';
+import { HotToastService } from '@ngxpert/hot-toast';
 
 
 @Component({
@@ -17,6 +18,8 @@ import { PATH_DASHBOARD } from '../../../Constants/path';
   styleUrl: './product-billing.component.css'
 })
 export class ProductBillingComponent {
+  private toastService = inject(HotToastService);
+
   cart$: Observable<any>;
   loading$: Observable<boolean>;
   error$: Observable<any>;
@@ -57,9 +60,10 @@ export class ProductBillingComponent {
 
 
   placdeOrder(){
-    this.router.navigate([PATH_DASHBOARD])
     this.store.dispatch(CartActions.emptyCart())
     localStorage.removeItem("CheckOutAddress")
+    this.toastService.success("Your Order Successfully Placed...");
+    this.router.navigate([PATH_DASHBOARD])
   }
   
 }

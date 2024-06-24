@@ -1,5 +1,5 @@
 import { Store } from '@ngrx/store';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, inject } from '@angular/core';
 import { ProductService } from '../../../Services/Product/product.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -8,6 +8,7 @@ import { SpinnerLoadingComponent } from '../../Common/spinner-loading/spinner-lo
 import { CartState } from '../../../../store/reducers/cart.reducer';
 import * as CartActions from '../../../../store/actions/cart.actions';
 import { PATH_DASHBOARD } from '../../../Constants/path';
+import { HotToastService } from '@ngxpert/hot-toast';
 
 
 @Component({
@@ -18,6 +19,8 @@ import { PATH_DASHBOARD } from '../../../Constants/path';
   styleUrl: './product-details.component.css'
 })
 export class ProductDetailsComponent {
+  private toastService = inject(HotToastService);
+
   product: any;
   productId!:string;
   quantityCount: number = 1; 
@@ -57,6 +60,7 @@ export class ProductDetailsComponent {
 
   addProduct(productId: string,quantityNum:number): void {
       this.store.dispatch(CartActions.addProductToCart({ productId, quantity: quantityNum }));
+      this.toastService.success("Product Added Successfully.");
       this.router.navigate([PATH_DASHBOARD.general.checkout])
   }
 

@@ -19,6 +19,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideHotToastConfig({
       position: 'top-right',
+      duration: 1500, 
     }),
     importProvidersFrom(NgxSpinnerModule.forRoot({ type: 'square-jelly-box' })),
     provideStore(reducers),

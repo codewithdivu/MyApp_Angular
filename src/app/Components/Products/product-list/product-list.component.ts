@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ProductService } from '../../../Services/Product/product.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CommonModule } from '@angular/common';
@@ -8,6 +8,7 @@ import { PATH_DASHBOARD } from '../../../Constants/path';
 import { CartState } from '../../../../store/reducers/cart.reducer';
 import { Store } from '@ngrx/store';
 import * as CartActions from '../../../../store/actions/cart.actions';
+import { HotToastService } from '@ngxpert/hot-toast';
 
 
 @Component({
@@ -18,7 +19,8 @@ import * as CartActions from '../../../../store/actions/cart.actions';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent {
-  
+  private toastService = inject(HotToastService);
+
   products: any[] = [];
   filteredProducts: any[] = [];
   searchQuery: string = '';
@@ -59,6 +61,7 @@ export class ProductListComponent {
 
   addProduct(productId: string): void {
     this.store.dispatch(CartActions.addProductToCart({ productId, quantity: 1 }));
+    this.toastService.success("Product Successfully Added.");
   }
 
   onSearch(event: Event) {
