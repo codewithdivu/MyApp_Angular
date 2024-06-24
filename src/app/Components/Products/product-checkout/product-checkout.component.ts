@@ -4,6 +4,8 @@ import { Observable, map, tap } from 'rxjs';
 import { CartState } from '../../../../store/reducers/cart.reducer';
 import * as CartActions from '../../../../store/actions/cart.actions';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { PATH_DASHBOARD } from '../../../Constants/path';
 
 
 @Component({
@@ -21,7 +23,8 @@ export class ProductCheckoutComponent {
   total$: Observable<number>;
 
 
-  constructor(private store: Store<{ cart: CartState }>) {
+
+  constructor(private store: Store<{ cart: CartState }>,private router:Router) {
     this.cart$ = this.store.select(state => state.cart.items).pipe(
       tap(cart => console.log('Cart Items:', cart))
     );
@@ -58,4 +61,9 @@ export class ProductCheckoutComponent {
   decrementQuantity(productId: string): void {
     this.store.dispatch(CartActions.decrementProductQuantity({ productId }));
   }
+
+  handleProceedCheckout(){
+    this.router.navigate([PATH_DASHBOARD.general.addressing])
+  }
+
 }

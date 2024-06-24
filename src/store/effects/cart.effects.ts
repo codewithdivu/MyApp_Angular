@@ -21,6 +21,19 @@ export class CartEffects {
     )
   );
 
+  emptyCart$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(CartActions.emptyCart),
+    mergeMap(() =>
+      this.cartService.emptyCart().pipe(
+        map(items => CartActions.emptyCartSuccess({ items })),
+        catchError(error => of(CartActions.cartError({ error })))
+      )
+    )
+  )
+);
+
+
   addProductToCart$ = createEffect(() =>
     this.actions$.pipe(
       ofType(CartActions.addProductToCart),

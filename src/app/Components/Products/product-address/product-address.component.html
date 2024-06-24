@@ -1,0 +1,62 @@
+<div class="container mt-5">
+  <h2>Personal Information Form</h2>
+  <form [formGroup]="infoForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        formControlName="name"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="phone" class="form-label">Phone Number</label>
+      <input
+        type="tel"
+        class="form-control"
+        id="phone"
+        formControlName="phone"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="address" class="form-label">Address</label>
+      <input
+        type="text"
+        class="form-control"
+        id="address"
+        formControlName="address"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="zipcode" class="form-label">Zip Code</label>
+      <input
+        type="text"
+        class="form-control"
+        id="zipcode"
+        formControlName="zipcode"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="city" class="form-label">City</label>
+      <input
+        type="text"
+        class="form-control"
+        id="city"
+        formControlName="city"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="state" class="form-label">State</label>
+      <input
+        type="text"
+        class="form-control"
+        id="state"
+        formControlName="state"
+      />
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!infoForm.valid">
+      Submit
+    </button>
+  </form>
+</div>

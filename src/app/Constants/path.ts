@@ -21,5 +21,7 @@ export const PATH_DASHBOARD = {
     products: path(ROOTS_DASHBOARD, '/products'),
     product: (id:string) => path(ROOTS_DASHBOARD, `/product/${id}`),
     checkout: path(ROOTS_DASHBOARD, '/checkout'),
+    addressing: path(ROOTS_DASHBOARD, '/address'),
+    billing: path(ROOTS_DASHBOARD, '/billing'),
   },
 };

@@ -1,1 +1,57 @@
-<h1>hello</h1>
+<div class="container mt-5" *ngIf="checkoutAddress">
+  <div class="card">
+    <div class="card-header">Checkout Address</div>
+    <div class="card-body">
+      <h5 class="card-title">{{ checkoutAddress.name }}</h5>
+      <p class="card-text">
+        <strong>Phone:</strong> {{ checkoutAddress.phone }}
+      </p>
+      <p class="card-text">
+        <strong>Address:</strong> {{ checkoutAddress.address }}
+      </p>
+      <p class="card-text">
+        <strong>Zip Code:</strong> {{ checkoutAddress.zipcode }}
+      </p>
+      <p class="card-text"><strong>City:</strong> {{ checkoutAddress.city }}</p>
+      <p class="card-text">
+        <strong>State:</strong> {{ checkoutAddress.state }}
+      </p>
+      <button class="btn btn-primary" (click)="editAddress()">
+        Want to Edit Address
+      </button>
+    </div>
+  </div>
+
+  <div class="col-md-16 mt-5">
+    <div class="card">
+      <div class="card-body">
+        <h2>Order Summary</h2>
+        <div class="row mb-3">
+          <div class="col-md-6"><strong>Subtotal:</strong></div>
+          <div class="col-md-6 text-right">
+            {{ subtotal$ | async | currency }}
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-6"><strong>Discount:</strong></div>
+          <div class="col-md-6 text-right">$0.00</div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-6"><strong>Shipping:</strong></div>
+          <div class="col-md-6 text-right">$10.00</div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-6"><strong>Total:</strong></div>
+          <div class="col-md-6 text-right">
+            {{ total$ | async | currency }}
+          </div>
+        </div>
+        <hr />
+      </div>
+      <button class="btn btn-primary btn-block mt-5" (click)="placdeOrder()">Place the Order</button>
+    </div>
+  </div>
+</div>
+<div class="container mt-5" *ngIf="!checkoutAddress">
+  <p>No checkout address found in localStorage.</p>
+</div>

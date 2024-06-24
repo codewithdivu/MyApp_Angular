@@ -35,6 +35,13 @@ export class CartService {
       );
   }
 
+  emptyCart():Observable<any>{
+    return this.http.delete(`${HOST_API}${API_ROUTES.CART.CART_EMPTY}`).pipe(map((response:any) => response.data.items ),
+    catchError(this.handleError)
+    
+    )
+  }
+
   incrementProductQuantity(productId: string): Observable<any> {
     return this.http.post(`${HOST_API}${API_ROUTES.CART.CART_INCREMENT}`, { productId }, )
       .pipe(

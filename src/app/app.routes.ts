@@ -12,6 +12,7 @@ import { ProductDetailsComponent } from './Components/Products/product-details/p
 import { ProductListComponent } from './Components/Products/product-list/product-list.component';
 import { ProductCheckoutComponent } from './Components/Products/product-checkout/product-checkout.component';
 import { ProductBillingComponent } from './Components/Products/product-billing/product-billing.component';
+import { ProductAddressComponent } from './Components/Products/product-address/product-address.component';
 
 export const routes: Routes = [
   {
@@ -74,9 +75,14 @@ export const routes: Routes = [
         title:"Cart Checkout"
       },
       {
+        path:'address',
+        component:ProductAddressComponent,
+        title:"Order Address"
+      },
+      {
         path:'billing',
         component:ProductBillingComponent,
-        title:"Cart Billing"
+        title:"Order Billing"
       }
     ],
   },

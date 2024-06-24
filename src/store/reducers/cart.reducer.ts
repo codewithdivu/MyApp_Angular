@@ -15,12 +15,17 @@ export const initialState: CartState = {
 
 export const cartReducer = createReducer(
   initialState,
-  on(CartActions.fetchCart, CartActions.addProductToCart, CartActions.removeProductFromCart, CartActions.incrementProductQuantity, CartActions.decrementProductQuantity, state => ({
+  on(CartActions.fetchCart,CartActions.emptyCart, CartActions.addProductToCart, CartActions.removeProductFromCart, CartActions.incrementProductQuantity, CartActions.decrementProductQuantity, state => ({
     ...state,
     loading: true,
     error: null,
   })),
   on(CartActions.fetchCartSuccess, (state, { items }) => ({
+    ...state,
+    items,
+    loading: false,
+  })),
+  on(CartActions.emptyCartSuccess, (state, { items }) => ({
     ...state,
     items,
     loading: false,
