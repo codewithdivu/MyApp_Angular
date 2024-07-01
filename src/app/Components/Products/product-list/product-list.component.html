@@ -82,11 +82,14 @@
         >
           {{ product.name }}
         </h5>
-        <p class="text-muted">{{ product.price | currency }}</p>
+        <p class="text-muted">{{ product.price | currency : "INR" }}</p>
         <button
           class="btn btn-primary"
           (click)="addProduct(product._id)"
-          [disabled]="!product.inStock"
+          [disabled]="
+            !product.inStock ||
+            (getCartProductQuantity(product._id) | async)! >= product.quantity
+          "
         >
           Add to Cart
         </button>

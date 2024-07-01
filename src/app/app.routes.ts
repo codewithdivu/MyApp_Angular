@@ -68,34 +68,34 @@ export const routes: Routes = [
       //   title:"Product List"
       // },
       {
-        path:'products/:id',
-        component:ProductDetailsComponent,
-        title:"Product Detail"        
+        path: 'products/:id',
+        component: ProductDetailsComponent,
+        title: 'Product Detail',
       },
       {
-        path:'checkout',
-        component:ProductCheckoutComponent,
-        title:"Cart Checkout"
+        path: 'checkout',
+        component: ProductCheckoutComponent,
+        title: 'Cart Checkout',
       },
       {
-        path:'address',
-        component:ProductAddressComponent,
-        title:"Order Address"
+        path: 'address',
+        component: ProductAddressComponent,
+        title: 'Order Address',
       },
       {
-        path:'billing',
-        component:ProductBillingComponent,
-        title:"Order Billing"
+        path: 'billing',
+        component: ProductBillingComponent,
+        title: 'Order Billing',
       },
       {
-        path:'contact-us',
-        component:ContactComponent,
-        title:"Contact Us"
+        path: 'contact-us',
+        component: ContactComponent,
+        title: 'Contact Us',
       },
       {
-        path:'about',
-        component:AboutComponent,
-        title:"About"
+        path: 'about',
+        component: AboutComponent,
+        title: 'About',
       },
     ],
   },

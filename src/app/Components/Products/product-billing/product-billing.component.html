@@ -1,57 +1,172 @@
 <div class="container mt-5" *ngIf="checkoutAddress">
-  <div class="card">
-    <div class="card-header">Checkout Address</div>
-    <div class="card-body">
-      <h5 class="card-title">{{ checkoutAddress.name }}</h5>
-      <p class="card-text">
-        <strong>Phone:</strong> {{ checkoutAddress.phone }}
-      </p>
-      <p class="card-text">
-        <strong>Address:</strong> {{ checkoutAddress.address }}
-      </p>
-      <p class="card-text">
-        <strong>Zip Code:</strong> {{ checkoutAddress.zipcode }}
-      </p>
-      <p class="card-text"><strong>City:</strong> {{ checkoutAddress.city }}</p>
-      <p class="card-text">
-        <strong>State:</strong> {{ checkoutAddress.state }}
-      </p>
-      <button class="btn btn-primary" (click)="editAddress()">
-        Want to Edit Address
-      </button>
+  <div class="row">
+    <div class="col-md-6 mb-4">
+      <div class="card">
+        <div class="card-header">Checkout Address</div>
+        <div class="card-body">
+          <h5 class="card-title">{{ checkoutAddress.name }}</h5>
+          <p class="card-text">
+            <strong>Phone:</strong> {{ checkoutAddress.phone }}
+          </p>
+          <p class="card-text">
+            <strong>Address:</strong> {{ checkoutAddress.address }}
+          </p>
+          <p class="card-text">
+            <strong>Zip Code:</strong> {{ checkoutAddress.zipcode }}
+          </p>
+          <p class="card-text">
+            <strong>City:</strong> {{ checkoutAddress.city }}
+          </p>
+          <p class="card-text">
+            <strong>State:</strong> {{ checkoutAddress.state }}
+          </p>
+          <button class="btn btn-primary" (click)="editAddress()">
+            Want to Edit Address
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 mb-4">
+      <div class="card">
+        <div class="card-header">Payment Options</div>
+        <div class="card-body">
+          <form>
+            <div class="form-group">
+              <div class="option-style mb-3" id="paypalOption">
+                <div class="d-flex align-items-center">
+                  <input
+                    type="radio"
+                    name="payment"
+                    value="paypal"
+                    id="paypal"
+                    (click)="toggleCreditCard(false)"
+                    class="custom-radio"
+                  />
+                  <label for="paypal" class="ml-2 mb-0">
+                    <strong>Pay with Paypal</strong>
+                    <p class="mb-0 text-muted">
+                      You will be redirected to PayPal website to complete your
+                      purchase securely.
+                    </p>
+                  </label>
+                  <img
+                    src="https://tap2pay.me/wp-content/uploads/2018/12/PayPal-Header-720x480-1.jpg"
+                    alt="PayPal"
+                    width="40"
+                    class="ml-auto"
+                  />
+                </div>
+              </div>
+
+              <div class="option-style mb-3" id="creditCardOption">
+                <div class="d-flex align-items-center">
+                  <input
+                    type="radio"
+                    name="payment"
+                    value="credit_card"
+                    id="creditCard"
+                    (click)="toggleCreditCard(true)"
+                    class="custom-radio"
+                  />
+                  <label for="creditCard" class="ml-2 mb-0">
+                    <strong>Credit / Debit Card</strong>
+                    <p class="mb-0 text-muted">
+                      We support Mastercard, Visa, Discover, and Stripe.
+                    </p>
+                  </label>
+                  <div class="ml-auto">
+                    <img
+                      src="https://upload.wikimedia.org/wikipedia/commons/b/b7/MasterCard_Logo.svg"
+                      alt="Mastercard"
+                      width="40"
+                    />
+                    <img
+                      src="https://banner2.cleanpng.com/20180712/zyt/kisspng-visa-payment-card-debit-card-mastercard-italy-visa-5b47ab98ba5571.6849154315314236407632.jpg"
+                      alt="Visa"
+                      width="40"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="option-style" id="cashOption">
+                <div class="d-flex align-items-center">
+                  <input
+                    type="radio"
+                    name="payment"
+                    value="cash"
+                    id="cash"
+                    (click)="toggleCreditCard(false)"
+                    class="custom-radio"
+                  />
+                  <label for="cash" class="ml-2 mb-0">
+                    <strong>Cash on Delivery</strong>
+                    <p class="mb-0 text-muted">
+                      Pay with cash when your order is delivered.
+                    </p>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div
+              id="creditCardDetails"
+              [style.display]="showCreditCardDetails ? 'block' : 'none'"
+            >
+              <div class="form-group">
+                <label for="cardSelect">Select Card</label>
+                <select class="form-control" id="cardSelect">
+                  <option value="mastercard">Mastercard</option>
+                  <option value="visa">Visa</option>
+                  <option value="stripe">Stripe</option>
+                </select>
+              </div>
+              <button type="button" class="btn btn-primary mt-2">
+                Add new card
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="col-md-16 mt-5">
-    <div class="card">
-      <div class="card-body">
-        <h2>Order Summary</h2>
-        <div class="row mb-3">
-          <div class="col-md-6"><strong>Subtotal:</strong></div>
-          <div class="col-md-6 text-right">
-            {{ subtotal$ | async | currency }}
+  <div class="row mt-5">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <h2>Order Summary</h2>
+          <div class="row mb-3">
+            <div class="col-md-6"><strong>Subtotal:</strong></div>
+            <div class="col-md-6 text-right">
+              {{ subtotal$ | async | currency : "INR" }}
+            </div>
           </div>
-        </div>
-        <div class="row mb-3">
-          <div class="col-md-6"><strong>Discount:</strong></div>
-          <div class="col-md-6 text-right">$0.00</div>
-        </div>
-        <div class="row mb-3">
-          <div class="col-md-6"><strong>Shipping:</strong></div>
-          <div class="col-md-6 text-right">$10.00</div>
-        </div>
-        <div class="row mb-3">
-          <div class="col-md-6"><strong>Total:</strong></div>
-          <div class="col-md-6 text-right">
-            {{ total$ | async | currency }}
+          <div class="row mb-3">
+            <div class="col-md-6"><strong>Discount:</strong></div>
+            <div class="col-md-6 text-right">₹0.00</div>
           </div>
+          <div class="row mb-3">
+            <div class="col-md-6"><strong>Shipping:</strong></div>
+            <div class="col-md-6 text-right">₹10.00</div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-6"><strong>Total:</strong></div>
+            <div class="col-md-6 text-right">
+              {{ total$ | async | currency : "INR" }}
+            </div>
+          </div>
+          <hr />
+          <button class="btn btn-primary btn-block mt-5" (click)="placeOrder()">
+            Place the Order
+          </button>
         </div>
-        <hr />
       </div>
-      <button class="btn btn-primary btn-block mt-5" (click)="placdeOrder()">Place the Order</button>
     </div>
   </div>
 </div>
+
 <div class="container mt-5" *ngIf="!checkoutAddress">
   <p>No checkout address found in localStorage.</p>
 </div>

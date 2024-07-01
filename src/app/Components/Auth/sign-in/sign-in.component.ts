@@ -48,6 +48,19 @@ export class SignInComponent {
       password: ['', [Validators.required]],
       remember_me: [false],
     });
+
+    const loginCredentialString = localStorage.getItem('loginCredential');
+
+    if (loginCredentialString) {
+      const loginCredential = JSON.parse(loginCredentialString);
+
+      if (loginCredential) {
+        this.signinForm.patchValue({
+          email: loginCredential.email,
+          password: loginCredential.password,
+        });
+      }
+    }
   }
 
   onSubmit() {
@@ -65,6 +78,15 @@ export class SignInComponent {
               console.log('res', res);
               if (res.success) {
                 this.toastService.success(res.msg);
+                if (loginData.remember_me) {
+                  localStorage.setItem(
+                    'loginCredential',
+                    JSON.stringify({
+                      email: loginData.email,
+                      password: loginData.password,
+                    })
+                  );
+                }
                 this.router.navigate([PATH_DASHBOARD.root]);
               } else {
                 this.toastService.error(res.msg);

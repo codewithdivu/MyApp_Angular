@@ -1,0 +1,19 @@
+.option-style {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  transition: box-shadow 0.3s;
+}
+.option-style.selected {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.custom-radio {
+  transform: scale(1.8);
+  margin-right: 2rem;
+  margin-left: 1rem;
+}

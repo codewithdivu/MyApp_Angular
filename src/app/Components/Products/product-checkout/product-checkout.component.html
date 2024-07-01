@@ -66,14 +66,27 @@
               *ngFor="let item of cart$ | async"
             >
               <div class="col-md-2">
-                <img
-                  [src]="item.images[0]"
-                  class="img-fluid"
-                  alt="Product Image"
-                />
+                <a
+                  [routerLink]="['/dashboard/products', item._id]"
+                  routerLinkActive="router-link-active"
+                  style="cursor: pointer"
+                >
+                  <img
+                    [src]="item.images[0]"
+                    class="img-fluid"
+                    alt="Product Image"
+                  />
+                </a>
               </div>
-              <div class="col-md-3">{{ item.name }}</div>
-              <div class="col-md-2">${{ item.price }}</div>
+              <div
+                class="col-md-3"
+                [routerLink]="['/dashboard/products', item._id]"
+                routerLinkActive="router-link-active"
+                style="cursor: pointer"
+              >
+                {{ item.name }}
+              </div>
+              <div class="col-md-2">₹{{ item.price }}</div>
               <div class="col-md-2">
                 <div class="input-group">
                   <div class="input-group-prepend">
@@ -101,14 +114,16 @@
                       class="btn btn-outline-secondary"
                       type="button"
                       (click)="incrementQuantity(item._id)"
+                      [disabled]="item.quantity >= getProductQuantity(item._id)"
                     >
                       +
                     </button>
                   </div>
+                  <p>Available : {{ getProductQuantity(item._id) }}</p>
                 </div>
               </div>
               <div class="col-md-2">
-                {{ item.quantity * item.price | number : "1.2-2" }}
+                ₹{{ item.quantity * item.price | number : "1.2-2" }}
               </div>
               <div class="col-md-1">
                 <button
@@ -142,21 +157,21 @@
           <div class="row mb-3">
             <div class="col-md-6"><strong>Subtotal:</strong></div>
             <div class="col-md-6 text-right">
-              {{ subtotal$ | async | currency }}
+              {{ subtotal$ | async | currency : "INR" }}
             </div>
           </div>
           <div class="row mb-3">
             <div class="col-md-6"><strong>Discount:</strong></div>
-            <div class="col-md-6 text-right">$0.00</div>
+            <div class="col-md-6 text-right">₹0.00</div>
           </div>
           <div class="row mb-3">
             <div class="col-md-6"><strong>Shipping:</strong></div>
-            <div class="col-md-6 text-right">$10.00</div>
+            <div class="col-md-6 text-right">₹10.00</div>
           </div>
           <div class="row mb-3">
             <div class="col-md-6"><strong>Total:</strong></div>
             <div class="col-md-6 text-right">
-              {{ total$ | async | currency }}
+              {{ total$ | async | currency : "INR" }}
             </div>
           </div>
           <hr />

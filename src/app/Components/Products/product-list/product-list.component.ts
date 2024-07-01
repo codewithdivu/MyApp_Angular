@@ -9,17 +9,18 @@ import { CartState } from '../../../../store/reducers/cart.reducer';
 import { Store } from '@ngrx/store';
 import * as CartActions from '../../../../store/actions/cart.actions';
 import { HotToastService } from '@ngxpert/hot-toast';
-
+import { Observable, find, map, tap } from 'rxjs';
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [SpinnerLoadingComponent, CommonModule,],
+  imports: [SpinnerLoadingComponent, CommonModule],
   templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.css']
+  styleUrls: ['./product-list.component.css'],
 })
 export class ProductListComponent {
   private toastService = inject(HotToastService);
+  cart$: Observable<any>;
 
   products: any[] = [];
   filteredProducts: any[] = [];
@@ -27,21 +28,21 @@ export class ProductListComponent {
   selectedCategory: string = 'all';
   selectedSort: string = 'default';
 
-
-
   constructor(
     private productService: ProductService,
     private spinner: NgxSpinnerService,
     private router: Router,
     private store: Store<{ cart: CartState }>
   ) {
-   
+    this.cart$ = this.store
+      .select((state) => state.cart.items)
+      .pipe(tap((cart) => console.log('Cart Items:', cart)));
   }
 
   ngOnInit() {
     this.loadProducts();
   }
-  
+
   loadProducts() {
     this.spinner.show();
     setTimeout(() => {
@@ -59,9 +60,20 @@ export class ProductListComponent {
     }, 500);
   }
 
+  getCartProductQuantity(id: string): Observable<number> {
+    return this.cart$.pipe(
+      map((items: any) => {
+        const item = items.find((item: any) => item._id === id);
+        return item ? item.quantity : 0;
+      })
+    );
+  }
+
   addProduct(productId: string): void {
-    this.store.dispatch(CartActions.addProductToCart({ productId, quantity: 1 }));
-    this.toastService.success("Product Successfully Added.");
+    this.store.dispatch(
+      CartActions.addProductToCart({ productId, quantity: 1 })
+    );
+    this.toastService.success('Product Successfully Added.');
   }
 
   onSearch(event: Event) {
@@ -87,14 +99,16 @@ export class ProductListComponent {
 
     // Search Filter
     if (this.searchQuery) {
-      filtered = filtered.filter(product =>
+      filtered = filtered.filter((product) =>
         product.name.toLowerCase().includes(this.searchQuery.toLowerCase())
       );
     }
 
     // Category Filter
     if (this.selectedCategory !== 'all') {
-      filtered = filtered.filter(product => product.category === this.selectedCategory);
+      filtered = filtered.filter(
+        (product) => product.category === this.selectedCategory
+      );
     }
 
     // Sort Filter

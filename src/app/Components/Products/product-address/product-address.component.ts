@@ -15,7 +15,7 @@ export class ProductAddressComponent {
   infoForm!: FormGroup;
 
   constructor(private fb: FormBuilder,private router:Router) { }
-
+ 
   ngOnInit(): void {
     const addressData = localStorage.getItem('CheckOutAddress');
     const parsedAddressData = addressData ? JSON.parse(addressData) : null;
